@@ -7,9 +7,31 @@ function App() {
   const { connected } = useTonConnect();
   const { value, address, sendIncrement } = useCounterContract();
 
+  const autoLogin = () => {
+    const queryString = window.Telegram.WebApp.initData;
+
+    var newHeader = new Headers();
+    newHeader.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      check_value: queryString,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: newHeader,
+      body: raw,
+      redirect: "follow",
+    };
+
+    console.log(requestOptions);
+  };
+
   return (
     <div className='App'>
       <div className='Container'>
+
+
         <TonConnectButton />
 
         <div className='Card'>
@@ -25,7 +47,7 @@ function App() {
         <a
           className={`Button ${connected ? 'Active' : 'Disabled'}`}
           onClick={() => {
-            sendIncrement();
+            autoLogin();
           }}
         >
           Increment
