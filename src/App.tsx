@@ -5,7 +5,8 @@ import { useCounterContract } from './hooks/useCounterContract';
 
 function App() {
   const { connected } = useTonConnect();
-  const { value, address, sendIncrement } = useCounterContract();
+  const { value, address } = useCounterContract();
+
 
   const autoLogin = () => {
     const queryString = window.Telegram.WebApp.initData;
@@ -58,3 +59,4 @@ function App() {
 }
 
 export default App
+declare const window: any;
