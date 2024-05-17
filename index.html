@@ -986,18 +986,74 @@
 </head>
 
 <body>
-	<main>
+	<!-- <main>
 		<button id="main_btn" onclick="DemoApp.sendMessage('');">Send «Hello, World!»</button>
-	</main>
+	</main> -->
+
+    <input type="text" class="url" placeholder="链接">
+    <!-- <br>
+    <button class="btn1">auth</button>
+    <br>
+    <input type="text" class="param" placeholder="参数"> -->
+    <br>
+    <button class="btn2">jump</button>
+
+    <script>
+        
+        
+    </script>
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <script type="application/javascript">
+    <script type="application/javascript">
 
     /*
      * This is a demo code for Telegram WebApp for Bots
      * It contains basic examples of how to use the API
      * Note: all requests to backend are disabled in this demo, you should use your own backend
      */
+
+    // let btn1 = document.querySelector('.btn1');
+    let btn2 = document.querySelector('.btn2');
+    let initData = '';
+    let url = '';
+
+    // btn1.addEventListener('click',function(){
+    //     url = document.querySelector('.url').value
+    //     DemoApp.sendMessage('');
+    //     initData= DemoApp.initData; 
+        
+    // })
+    btn2.addEventListener('click',function(){
+        url = document.querySelector('.url').value
+        DemoApp.sendMessage('');
+        initData= DemoApp.initData; 
+
+        let param = { initData }
+
+        // data2 = document.querySelector('.param').value
+        // let params = data2.split('&')
+        // params.forEach(item => {
+        //     let arr = item.split('=')
+        //     param[arr[0]] = arr[1]
+        // })
+
+        fetch( url , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(param)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 这里处理请求结果
+            console.log(data,'data')
+            //location.href = data.data
+        })
+        .catch(error => {
+            console.log(error,'error')
+        });
+    })
 
     const DemoApp = {
         initData      : Telegram.WebApp.initData || '',
@@ -1031,10 +1087,10 @@
 
         // actions
         sendMessage(msg_id, with_webview) {
-            if (!DemoApp.initDataUnsafe.query_id) {
-                alert('WebViewQueryId not defined');
-                return;
-            }
+            // if (!DemoApp.initDataUnsafe.query_id) {
+            //     alert('WebViewQueryId not defined');
+            //     return;
+            // }
             console.log("initData: " + DemoApp.initData);          
         },
         changeMenuButton(close) {
@@ -1345,7 +1401,7 @@
         const k = Math.pow(10, d || 0);
         return Math.round(val * k) / k;
     }
-</script>
+    </script>
 </body>
 
 </html>
