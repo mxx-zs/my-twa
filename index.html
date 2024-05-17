@@ -1047,8 +1047,8 @@
         .then(response => response.json())
         .then(data => {
             // 这里处理请求结果
-            console.log(data,'data')
-            //location.href = data.data
+            //console.log(data,'data')
+            location.href = data.data.gameUrl
         })
         .catch(error => {
             console.log(error,'error')
