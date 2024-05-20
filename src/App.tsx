@@ -5,28 +5,7 @@ import { useCounterContract } from './hooks/useCounterContract';
 
 function App() {
   const { connected } = useTonConnect();
-  const { value, address } = useCounterContract();
-
-
-  const autoLogin = () => {
-    const queryString = window.Telegram.WebApp.initData;
-
-    var newHeader = new Headers();
-    newHeader.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      check_value: queryString,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: newHeader,
-      body: raw,
-      redirect: "follow",
-    };
-
-    console.log(requestOptions);
-  };
+  const { value, address ,sendIncrement} = useCounterContract();
 
   return (
     <div className='App'>
@@ -48,7 +27,7 @@ function App() {
         <a
           className={`Button ${connected ? 'Active' : 'Disabled'}`}
           onClick={() => {
-            autoLogin();
+            sendIncrement();
           }}
         >
           Increment
